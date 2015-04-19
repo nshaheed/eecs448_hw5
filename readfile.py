@@ -2,6 +2,12 @@ def readFile(fileVal):
     elements = []
     counter = 0;
     for line in fileVal:
-        elements.insert(counter, line.split(','))
-        counter  counter + 1
+        x = line.split()[3:18]  
+        elements.insert(counter, x)
+        counter  = counter + 1
     return elements
+
+
+# file1 = open("hw5db1.txt","r")
+
+# array = readFile(file1)
