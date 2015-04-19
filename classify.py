@@ -6,9 +6,9 @@
 
 # Euclidean distance between two vectors
 def euclidVec(v1, v2):
-    if length(v1) != length(v2):
+    if len(v1) != len(v2):
         except ValueError("Input vectors must have the same length: ", v1, v2)
-    return sqrt(reduce((lambda x,y: x + y), 0, [(v2[i] - v1[i])^2 for i in range(length(v1))]))
+    return sqrt(reduce((lambda x,y: x + y), 0, [(v2[i] - v1[i])^2 for i in range(len(v1))]))
 
 def euclid(v, stats):
     pass # return euclidVec(v, stats.mean)
@@ -19,13 +19,19 @@ def mahalanobis(v, stats):
     pass #todo: implement
 
 # classifies based on distance in all dimensions
-# method should be :: v -> stats -> Bool, e.g. euclid, mahalanobis
+# method should be :: v -> Stats -> Bool, e.g. euclid, mahalanobis
 def directClassify(v, statsActive, statsInactive, method):
-    pass #todo: implement
+    return method(v, statsActive) < method(v, statsInactive)
 
 # classifies based on voting method: compares dimensions separately and votes
 def votingClassify(v, statsActive, statsInactive, method):
-    pass #todo: implement
+    l = len(v)
+    activeCount = 0
+    for i in range(l):
+        if method([len[i]],statsActive.getDimension(i)) < method([len[i]],statsInactive.getDimension(i)):
+            activeCount += 1
+    return activeCount > l / 2
+
 
 # calculate stats object for given set of vectors
 def getStats(vs):
