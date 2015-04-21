@@ -1,19 +1,25 @@
+#!/usr/bin/python34
+
 from PyQt4 import QtCore, QtGui
 import sys
 
 
-
+class calcHandler:
+    def __init__(self):
+        self.method = 0
+    def setMethod(self, method):
+        self.method = method
 
 
 class UI(QtGui.QWidget):
 
-    def __init__(self):
+    def __init__(self, model):
         super(UI,self).__init__()
         self.initiation()
-
+        self.m = model
 
     def initiation(self):
-        self.method = 0
+        
         
         #seperator
         line = QtGui.QFrame(self)
@@ -51,9 +57,9 @@ class UI(QtGui.QWidget):
 
     def setMethod(self):
         sender = self.sender()
-        self.method = sender.currentIndex()
+        self.m.setMethod(sender.currentIndex())
     def clickCalc(self):
-        print(self.sender().text() + str(self.method))
+        print(self.sender().text() + str(self.m.method))
 
 
 
@@ -61,7 +67,8 @@ class UI(QtGui.QWidget):
 
 def main():
     app = QtGui.QApplication(sys.argv)
-    ui = UI()    
+    m = calcHandler()
+    ui = UI(m)    
     sys.exit(app.exec_())
 
 
