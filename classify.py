@@ -25,12 +25,12 @@ def directClassify(v, statsActive, statsInactive, method):
 
 # classifies based on voting method: compares dimensions separately and votes
 def votingClassify(v, statsActive, statsInactive, method):
-    l = len(v)
+    length = len(v)
     activeCount = 0
-    for i in range(l):
-        if method([len[i]],statsActive.getDimension(i)) < method([len[i]],statsInactive.getDimension(i)):
+    for i in range(length):
+        if method([v[i]],statsActive.getDimension(i)) < method([v[i]],statsInactive.getDimension(i)):
             activeCount += 1
-    return activeCount > l / 2
+    return activeCount > length / 2
 
 
 # calculate stats object for given set of vectors
