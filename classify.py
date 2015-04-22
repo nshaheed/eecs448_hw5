@@ -4,11 +4,13 @@
 # EECS 448 HW5
 # 
 
+import math
+
 # Euclidean distance between two vectors
 def euclidVec(v1, v2):
     if len(v1) != len(v2):
-        except ValueError("Input vectors must have the same length: ", v1, v2)
-    return sqrt(reduce((lambda x,y: x + y), 0, [(v2[i] - v1[i])^2 for i in range(len(v1))]))
+        raise ValueError("Input vectors must have the same length: ", v1, v2)
+    return math.sqrt(sum([(v2[i] - v1[i])**2 for i in range(len(v1))]))
 
 def euclid(v, stats):
     pass # return euclidVec(v, stats.mean)
