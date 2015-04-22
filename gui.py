@@ -10,6 +10,7 @@ class calcHandler:
         self.method = 0
         self.values = [None,None,None,None,None]
         self.maximum = None
+        self.names = [' Eucl Dist', ' Maha Dist', ' Eucl Vote', ' Maha Vote', '  Custom']
     def setMethod(self, method):
         self.method = method
     def calc(self):
@@ -85,13 +86,14 @@ class UI(QtGui.QWidget):
             qp.drawRect(50, 350, 300, 0)
             qp.drawRect(50, 150, 0, 200)
             qp.drawRect(45, 150, 10, 0)
-            #Label
+            #Label text
             qp.drawText(25,155,'%.1f' % self.m.maximum)
             #data bars
             qp.setBrush(QtGui.QColor(150, 0, 0))
             for i,x in enumerate(self.m.values):
                 if x:
-                   qp.drawRect(60+i*55, 350-200*(x/self.m.maximum), 50, 200*(x/self.m.maximum)) 
+                   qp.drawRect(60+i*55, 350-200*(x/self.m.maximum), 50, 200*(x/self.m.maximum))
+                   qp.drawText(60+i*55, 365 ,self.m.names[i])
 
         
 
