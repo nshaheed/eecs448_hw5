@@ -5,6 +5,7 @@
 # 
 
 import math
+import ratio
 
 # Euclidean distance between two vectors
 def euclidVec(v1, v2):
@@ -33,6 +34,16 @@ def votingClassify(v, statsActive, statsInactive, method):
         if method([v[i]],statsActive.getDimension(i)) < method([v[i]],statsInactive.getDimension(i)):
             activeCount += 1
     return activeCount > length / 2
+
+# custom classification method based off of the given four.  Assume True = Active, False = NonActive
+#    currently: A simple majority vote
+def customClassify(euclid, mahal, euclidVote, mahalVote):
+    lst = [euclid, mahal, euclidVote, mahalVote]
+    numTrue = len([i for i in lst if i])
+    if numTrue >= 2:
+        return True
+    else:
+        return False
 
 
 # calculate stats object for given set of vectors

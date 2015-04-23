@@ -1,5 +1,3 @@
-
-
 # Get ratio of list of bools ([Bool]), where ratio is (number of True)/(number of False)
 def getRatio(lst):
     numA = len([i for i in lst if i == "A"])

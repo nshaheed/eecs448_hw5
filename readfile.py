@@ -1,3 +1,6 @@
+# functions build for reading hw5db1.txt & hw5db2.txt and returning their elements as [[]]
+
+# reading hw5db1.txt
 def readFile(fileVal):
     elements = []
     counter = 0;
@@ -7,6 +10,7 @@ def readFile(fileVal):
         counter  = counter + 1
     return elements
 
+# reading hw5db2.txt
 def readStats(fileVal):
     elements = []
     counter = 0;

@@ -1,6 +1,8 @@
 import math
 
 class classifier(object):
+    
+    # Euclidian distance method
     def method_1(self,v1,statA,statStd):
         if len(v1) != len(statA):
             raise ValueError("Input vectors must have the same length: ", v1, statA)
@@ -10,6 +12,7 @@ class classifier(object):
         return math.sqrt(sum([(float(statA[i]) - float(v1[i]))**2 for i in range(len(v1))]))
         #return math.sqrt(self.dist)
                 
+    # Mahalanobis distance method
     def method_2(self,v1,statA,statStd):
         if len(v1) != len(statA):
             raise ValueError("Input vectors must have the same length: ", v1, statA)
@@ -19,9 +22,11 @@ class classifier(object):
         #return math.sqrt(self.dist)
         return math.sqrt(sum([((float(statA[i]) - float(v1[i]))/float(statStd[i]))**2 for i in range(len(v1))]))
 
+    # Euclidian voting method
     def method_3(self,v1,stats):
         self.method_3_cassifications = []
 
+    # Mahalanobis distance method
     def method_4(self,v1,stats):
         self.method_4_cassifications = []
 
