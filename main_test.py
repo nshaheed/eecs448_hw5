@@ -26,6 +26,11 @@ result2 = classifier.directClassify(vectors.vectorArr,vectors.statArr,classifier
 #Just testing stuff
 ####################################
 
+print(len(result1))
+print(result1[1])
+
+print(len(result2))
+print(result1[2])
 
 for i in range(0,15):
     if result1[i]:
