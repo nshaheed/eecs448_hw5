@@ -25,8 +25,20 @@ class classifier(object):
     def method_4(self,v1,stats):
         self.method_4_cassifications = []
 
-    def directClassify(self,vector,stats,method):#recieves a list of vectors, the list of mean std vectors, and a method to send them too. Gives back a string of ANANANNANNANANA in order of chemicals. A = active N = Not Active
+    #recieves a list of vectors, the list of mean std vectors, and a method to send them too. Gives back a string of
+    #  ANANANNANNANANA in order of chemicals. A = active N = Not Active
+    def directClassify(self,vector,stats,method):
         self.A_N_Vector = []
         for i in range(0,len(vector)):
             self.A_N_Vector.append(method(vector[i].vector_data, stats[0].vector_data,stats[2].vector_data) < method(vector[i].vector_data,stats[1].vector_data,stats[3].vector_data))
         return self.A_N_Vector
+
+    # custom classification method based off of the given four.  Assume True = Active, False = NonActive
+    #    currently: A simple majority vote
+    def customClassify(euclid, mahal, euclidVote, mahalVote):
+        lst = [euclid, mahal, euclidVote, mahalVote]
+        numTrue = len([i for i in lst if i])
+        if numTrue >= 2:
+            return True
+        else:
+            return False

@@ -2,13 +2,14 @@
 
 # Get ratio of list of bools ([Bool]), where ratio is (number of True)/(number of False)
 def getRatio(lst):
-    numTrue = len([i for i in lst if i])
-    numFalse = len([i for i in lst if not i])
+    numA = len([i for i in lst if i == "A"])
+    numN = len([i for i in lst if i == "N"])
 
-    if numFalse == 0:
-        return 0.
+    # returns -1 if the ratio is n/0
+    if numN == 0:
+        return -1.
     else:
-        ratio = float(numTrue) / float(numFalse)
+        ratio = float(numA) / float(numN)
         return ratio
 
 # Testing
