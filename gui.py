@@ -3,28 +3,64 @@
 from PyQt4 import QtCore, QtGui
 import sys
 import random
+import classifier
+import math
+import readfile
+import vector_handler
+import ratio
 
 
 class calcHandler:
     def __init__(self):
         self.method = 0
+        self.data = [None,None,None,None,None]
         self.values = [None,None,None,None,None]
         self.maximum = None
         self.names = [' Eucl Dist', ' Maha Dist', ' Eucl Vote', ' Maha Vote', '  Custom']
+
+        file1 = open("hw5db1.txt","r")
+        file2 = open("hw5db2.txt","r")
+        dataIn = readfile.readFile(file1)
+        stats = readfile.readStats(file2)
+
+        self.vectors = vector_handler.vector_holder(dataIn,stats)
+        self.classifier = classifier.classifier()
+        
     def setMethod(self, method):
         self.method = method
+        
     def calc(self):
-        if 0 == self.method:
-            self.values[0] = 2*random.random()
-        elif 1 == self.method:
-            self.values[1] = random.random()
-        elif 2 == self.method:
-            self.values[2] = random.random()
-        elif 3 == self.method:
-            self.values[3] = random.random()
+        #Calculate the array of results if we need to, and then calculate the ratio.
+        if self.method in range(0,4):
+            if not self.data[self.method]:
+                self.calcData(self.method)
+            self.values[self.method] = ratio.ratio(self.data[self.method])
+        #For custom measure, calculate all uncalculated methods and then use them to calculate the final
         elif 4 == self.method:
-            self.values[4] = random.random()
-        self.maximum = max([x for x in self.values if x]+[1])
+            if not self.data[4]:
+                for i,x in enumerate(self.data):
+                    if (x == None) and i < 4:
+                        print(i)
+                        self.calcData(i)
+                self.data[4] = []
+                for i in range(0, len(self.data[0])):
+                    self.data[4].append(self.classifier.customClassify(self.data[0][i], self.data[1][i], self.data[2][i], self.data[3][i]))
+            self.values[4] = ratio.ratio(self.data[4])
+            
+        self.maximum = max([x for x in self.values if x])
+
+    def calcData(self, x):
+        if x == 0:
+            self.data[0] = self.classifier.directClassify(self.vectors.vectorArr,self.vectors.statArr,self.classifier.method_1)
+        elif x == 1:
+            self.data[1] = self.classifier.directClassify(self.vectors.vectorArr,self.vectors.statArr,self.classifier.method_2)
+        elif x == 2:
+            self.data[2] = self.classifier.votingClassify(self.vectors.vectorArr,self.vectors.statArr,self.classifier.method_3)
+        elif x == 3:
+            self.data[3] = self.classifier.votingClassify(self.vectors.vectorArr,self.vectors.statArr,self.classifier.method_4)
+            
+
+
 
 class UI(QtGui.QWidget):
 
@@ -87,7 +123,7 @@ class UI(QtGui.QWidget):
             qp.drawRect(50, 150, 0, 200)
             qp.drawRect(45, 150, 10, 0)
             #Label text
-            qp.drawText(25,155,'%.1f' % self.m.maximum)
+            qp.drawText(15,155,'%.3f' % self.m.maximum)
             #data bars
             qp.setBrush(QtGui.QColor(150, 0, 0))
             for i,x in enumerate(self.m.values):

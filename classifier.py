@@ -54,7 +54,7 @@ class classifier(object):
 
     # custom classification method based off of the given four.  Assume True = Active, False = NonActive
     #    currently: A simple majority vote
-    def customClassify(euclid, mahal, euclidVote, mahalVote):
+    def customClassify(self, euclid, mahal, euclidVote, mahalVote):
         lst = [euclid, mahal, euclidVote, mahalVote]
         numTrue = len([i for i in lst if i])
         if numTrue >= 2:
