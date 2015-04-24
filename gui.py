@@ -1,4 +1,4 @@
-#!/usr/bin/python34
+#!/usr/bin/python3.4
 
 from PyQt4 import QtCore, QtGui
 import sys
@@ -51,13 +51,18 @@ class calcHandler:
 
     def calcData(self, x):
         if x == 0:
+            print('Calculating Euclidean Distance')
             self.data[0] = self.classifier.directClassify(self.vectors.vectorArr,self.vectors.statArr,self.classifier.method_1)
         elif x == 1:
+            print('Calculating Maha Distance')
             self.data[1] = self.classifier.directClassify(self.vectors.vectorArr,self.vectors.statArr,self.classifier.method_2)
         elif x == 2:
+            print('Calculating Euclidean Voting')
             self.data[2] = self.classifier.votingClassify(self.vectors.vectorArr,self.vectors.statArr,self.classifier.method_3)
         elif x == 3:
+            print('Calculating Maha Voting')
             self.data[3] = self.classifier.votingClassify(self.vectors.vectorArr,self.vectors.statArr,self.classifier.method_4)
+        print('Calculations Complete')
             
 
 
@@ -122,8 +127,11 @@ class UI(QtGui.QWidget):
             qp.drawRect(50, 350, 300, 0)
             qp.drawRect(50, 150, 0, 200)
             qp.drawRect(45, 150, 10, 0)
+            qp.drawRect(45, 350, 10, 0)
             #Label text
+            qp.drawText(100,120, 'Ratio of True Positives to False Postives')
             qp.drawText(15,155,'%.3f' % self.m.maximum)
+            qp.drawText(35,355,'0')
             #data bars
             qp.setBrush(QtGui.QColor(150, 0, 0))
             for i,x in enumerate(self.m.values):
@@ -141,9 +149,6 @@ class UI(QtGui.QWidget):
     def clickCalc(self):
         self.m.calc()
         self.update()
-        #self.paintEvent()
-        #self.disp_lbl.setText(viewGraph(self.m.values, self.m.max))
-        #self.disp_lbl.setText('hh\nlklk')
 
 
 
