@@ -40,7 +40,7 @@ class calcHandler:
             if not self.data[4]:
                 for i,x in enumerate(self.data):
                     if (x == None) and i < 4:
-                        print(i)
+                        #print(i)
                         self.calcData(i)
                 self.data[4] = []
                 for i in range(0, len(self.data[0])):

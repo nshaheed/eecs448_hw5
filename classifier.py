@@ -57,7 +57,7 @@ class classifier(object):
     def customClassify(self, euclid, mahal, euclidVote, mahalVote):
         lst = [euclid, mahal, euclidVote, mahalVote]
         numTrue = len([i for i in lst if i])
-        if numTrue >= 2:
+        if (lst[2]) or (numTrue > 2):
             return True
         else:
             return False
