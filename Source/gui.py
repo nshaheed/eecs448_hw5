@@ -7,6 +7,7 @@
 
 from PyQt4 import QtCore, QtGui
 import sys
+
 import classifier
 import readfile
 import vector_handler
