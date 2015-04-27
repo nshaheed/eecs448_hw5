@@ -9,6 +9,8 @@ def ratio(results):
                 truePositives += 1
             else:
                 falsePositives += 1
+    print("Naa: " + str(truePositives))
+    print("Nan: " + str(falsePositives))
     if falsePositives == 0:
         return float("inf")
     return float(truePositives) / float(falsePositives)

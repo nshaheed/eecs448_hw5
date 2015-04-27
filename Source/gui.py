@@ -111,7 +111,8 @@ class UI(QtGui.QWidget):
 
         #window
         self.setGeometry(300, 300, 400, 400)
-        self.setWindowTitle('Chemical Analysis')    
+        self.setWindowTitle('Chemical Analysis')
+        self.setWindowIcon(QtGui.QIcon('HW5.ico'))
         self.show()
 
     def paintEvent(self,e):
